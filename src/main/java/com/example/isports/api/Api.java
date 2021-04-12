@@ -22,9 +22,11 @@ public class Api {
     private static String requestUrl;
     private static HashMap<String,Object> mParams;
     public static Api api = new Api();
+
     public Api(){
 
     }
+
     public static Api config(String url, HashMap<String,Object> params){
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
@@ -33,6 +35,7 @@ public class Api {
         return api;
     }
     public static void postRequest(TtitCallback callback){
+        client=new OkHttpClient();
         JSONObject jsonObject = new JSONObject(mParams);
         String jsonStr = jsonObject.toString();
         RequestBody requestBodyJson =
@@ -45,7 +48,7 @@ public class Api {
                 .post(requestBodyJson)
                 .build();
         //第四步创建call回调对象
-        final Call call = client.newCall(request);
+     Call call = client.newCall(request);
         //第五步发起请求
         call.enqueue(new Callback() {
             @Override

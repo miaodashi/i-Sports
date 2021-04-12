@@ -3,6 +3,7 @@ package com.example.isports.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
@@ -15,8 +16,10 @@ import com.example.isports.R;
 import com.example.isports.api.Api;
 import com.example.isports.api.ApiConfig;
 import com.example.isports.api.TtitCallback;
+import com.example.isports.entity.LoginResponse;
 import com.example.isports.util.AppConfig;
 import com.example.isports.util.StringUtils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 import java.io.IOException;
@@ -64,21 +67,28 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         HashMap<String,Object> params = new HashMap<String, Object>();
-        params.put("mobile", account);
+        params.put("studynumber", account);
         params.put("password", pwd);
         Api.config(ApiConfig.LOGIN,params).postRequest(new TtitCallback() {
             @Override
             public void onSuccess(String res) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showToast(res);
-                    }
-                });
-            }
+                Log.e( "onSuccess: ", res);
+                showToastSync(res);
+                Gson gson = new Gson();
+                LoginResponse loginResponse =gson.fromJson(res,LoginResponse.class);
+                if(loginResponse.getCode() == 0) {
+                    String token =loginResponse.getToken();
+                    saveStringToSp("token",token);
+                    showToastSync("登录成功");
+                }else{
+                    showToastSync("登录失败");
+                }
+                }
+
 
             @Override
             public void onFailure(Exception e) {
+
 
             }
         });
@@ -109,7 +119,7 @@ public class LoginActivity extends BaseActivity {
 //
 //            @Override
 //            public void onResponse(Call call, Response response) throws IOException {
-//                final String result = response.body().string();
+//                String result = response.body().string();
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {

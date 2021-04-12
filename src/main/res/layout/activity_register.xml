@@ -45,6 +45,9 @@
                     android:layout_height="30dp"
                     android:src="@drawable/login_loge" />
                 <EditText
+                    android:id="@+id/et_account"
+                    android:inputType="number"
+                    android:singleLine="true"
                     android:layout_width="200dp"
                     android:layout_marginLeft="20dp"
                     android:layout_height="wrap_content"
@@ -72,8 +75,10 @@
                     android:layout_height="25dp"
                     android:src="@drawable/pwd_loge" />
                 <EditText
+                    android:id="@+id/et_pwd"
                     android:inputType="textPassword"
                     android:layout_width="200dp"
+                    android:singleLine="true"
                     android:layout_marginLeft="20dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
@@ -85,7 +90,7 @@
 
         </LinearLayout>
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/register_btn"
             android:layout_marginTop="50dp"
             android:text="@string/register"
             android:textSize="22sp"
