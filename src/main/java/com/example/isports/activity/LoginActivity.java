@@ -79,8 +79,11 @@ public class LoginActivity extends BaseActivity {
                 if(loginResponse.getCode() == 0) {
                     String token =loginResponse.getToken();
                     saveStringToSp("token",token);
+                    navigateTo(HomeActivity.class);
                     showToastSync("登录成功");
-                }else{
+                }
+                else
+                    {
                     showToastSync("登录失败");
                 }
                 }
@@ -92,43 +95,6 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .build();
-//        Map m = new HashMap();
-//        m.put("mobile", account);
-//        m.put("password", pwd);
-//        JSONObject jsonObject = new JSONObject(m);
-//        String jsonStr = jsonObject.toString();
-//        RequestBody requestBodyJson =
-//                RequestBody.create(MediaType.parse("application/json;charset=utf-8")
-//                        , jsonStr);
-//        //第三步创建Rquest
-//        Request request = new Request.Builder()
-//                .url(AppConfig.BASE_URL + "/app/login")
-//                .addHeader("contentType", "application/json;charset=UTF-8")
-//                .post(requestBodyJson)
-//                .build();
-//        //第四步创建call回调对象
-//        final Call call = client.newCall(request);
-//        //第五步发起请求
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.e("onFailure", e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String result = response.body().string();
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        showToast(result);
-//                    }
-//                });
-//            }
-//
-//
-//        });
+
     }
 }

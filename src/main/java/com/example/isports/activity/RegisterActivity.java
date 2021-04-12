@@ -29,7 +29,6 @@ public class RegisterActivity extends BaseActivity {
         etAccount = findViewById(R.id.et_account);
         etPassword = findViewById(R.id.et_pwd);
         btnRegister = findViewById(R.id.register_btn);
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
